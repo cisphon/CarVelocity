@@ -411,10 +411,10 @@ public class Test extends DragFactor {
                     }
                 }
 
-                System.out.println("Please enter super-elevation:");
+                System.out.println("Please enter super-elevation(as decimal):");
                 double e = sc.nextDouble();
                 //validates super-elevation
-                while (e >= 500) {
+                while (e >= 1) {
                     System.out.println("Are you sure this data is correct?");
                     System.out.println("1.Yes");
                     System.out.println("2.No");
@@ -422,7 +422,7 @@ public class Test extends DragFactor {
                     if (validation == 1)
                         break;
                     else {
-                        System.out.println("Please enter super-elevation:");
+                    	System.out.println("Please enter super-elevation(as decimal):");
                         e = sc.nextDouble();
                     }
                 }
@@ -717,10 +717,10 @@ public class Test extends DragFactor {
                     }
                 }
 
-                System.out.println("Please enter super-elevation:");
+                System.out.println("Please enter super-elevation(as decimal):");
                 double se = sc.nextDouble();
                 //validates super-elevation
-                while (se >= 500) {
+                while (se >= 1) {
                     System.out.println("Are you sure this data is correct?");
                     System.out.println("1.Yes");
                     System.out.println("2.No");
@@ -728,7 +728,7 @@ public class Test extends DragFactor {
                     if (validation == 1)
                         break;
                     else {
-                        System.out.println("Please enter super-elevation:");
+                    	System.out.println("Please enter super-elevation(as decimal):");
                         se = sc.nextDouble();
                     }
                 }
