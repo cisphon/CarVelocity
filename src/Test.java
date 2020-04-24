@@ -733,7 +733,7 @@ public class Test extends DragFactor {
                     }
                 }
 
-                System.out.println("Velocity: " + (Math.sqrt(GF * Math.pow(D, 2)) / (2 * (H + (D * se))));
+                System.out.println("Velocity: " + (Math.sqrt(GF * Math.pow(D, 2)) / (2 * (H + (D * se)))));
 
                 break;
 
