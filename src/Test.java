@@ -4,7 +4,7 @@ public class Test extends DragFactor {
     static Scanner sc = new Scanner(System.in);
 
     // this prints the cases
-    public static void prompt(int mph) {
+    public static void casePrompt(int mph) {
         System.out.println("MPH: " + mph);
         System.out.println("Please select road number:");
         System.out.println("1.Portland Cement: New, Sharp");
@@ -23,6 +23,13 @@ public class Test extends DragFactor {
         System.out.println("14.Snow: Loose");
     }
 
+    public static void validatePrompt()
+    {
+        System.out.println("Are you sure this data is correct?");
+        System.out.println("1.Yes");
+        System.out.println("2.No");
+    }
+
     public static void main(String[] args) {
 
         System.out.println("Please select case number:");
@@ -36,9 +43,7 @@ public class Test extends DragFactor {
 
         //validates altitude
         while (r >= 5000) {
-            System.out.println("Are you sure this data is correct?");
-            System.out.println("1.Yes");
-            System.out.println("2.No");
+            validatePrompt();
             int validation = sc.nextInt();
             if (validation == 1)
                 break;
@@ -58,9 +63,7 @@ public class Test extends DragFactor {
                 int mph = sc.nextInt();
                 //validates mph
                 while (mph >= 200) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -73,16 +76,14 @@ public class Test extends DragFactor {
                 System.out.println("Please input Wet or Dry:");
                 String wod = sc.next();
 
-                prompt(mph);
+                casePrompt(mph);
                 int road = sc.nextInt();
 
                 System.out.println("Please enter Final Velocity:");
                 double vf = sc.nextDouble();
                 //validates final velocity
                 while (vf >= 500) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -96,9 +97,7 @@ public class Test extends DragFactor {
                 double sd = sc.nextDouble();
                 //validates skid distance
                 while (sd >= 500) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -370,9 +369,7 @@ public class Test extends DragFactor {
                 int mph2 = sc.nextInt();
                 //validates mph2
                 while (mph2 >= 200) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -385,16 +382,14 @@ public class Test extends DragFactor {
                 System.out.println("Please input Wet or Dry:");
                 String wod2 = sc.next();
 
-                prompt(mph2);
+                casePrompt(mph2);
                 int road2 = sc.nextInt();
 
                 System.out.println("Please enter the Radius:");
                 double R = sc.nextDouble();
                 //validates radius
                 while (R >= 1000) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -408,9 +403,7 @@ public class Test extends DragFactor {
                 double e = sc.nextDouble();
                 //validates super-elevation
                 while (e >= 1) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -682,9 +675,7 @@ public class Test extends DragFactor {
                 double D = sc.nextDouble();
                 //validates horizontal distance
                 while (D >= 200) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -698,9 +689,7 @@ public class Test extends DragFactor {
                 double H = sc.nextDouble();
                 //validates vertical distance
                 while (H >= 200) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
@@ -714,9 +703,7 @@ public class Test extends DragFactor {
                 double se = sc.nextDouble();
                 //validates super-elevation
                 while (se >= 1) {
-                    System.out.println("Are you sure this data is correct?");
-                    System.out.println("1.Yes");
-                    System.out.println("2.No");
+                    validatePrompt();
                     int validation = sc.nextInt();
                     if (validation == 1)
                         break;
