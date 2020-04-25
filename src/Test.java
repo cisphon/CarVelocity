@@ -23,11 +23,129 @@ public class Test extends DragFactor {
         System.out.println("14.Snow: Loose");
     }
 
-    public static void validatePrompt()
-    {
+    public static void validatePrompt() {
         System.out.println("Are you sure this data is correct?");
         System.out.println("1.Yes");
         System.out.println("2.No");
+    }
+
+    public static int validateMPH(int num) {
+        while (num >= 200) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please input MPH:");
+                num = sc.nextInt();
+            }
+        }
+
+        return num;
+    }
+
+    public static double validateAltitude(double num) {
+        //validates altitude
+        while (num >= 5000) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please input altitude(meters):");
+                num = sc.nextDouble();
+            }
+        }
+        return num;
+    }
+
+    public static double validateFinalVelocity(double num) {
+        //validates skid distance
+        while (num >= 500) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please enter Skid Distance(meters):");
+                num = sc.nextDouble();
+            }
+        }
+        return num;
+    }
+
+    public static double validateSkidDistance(double num) {
+        while (num >= 500) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please enter Skid Distance(meters):");
+                num = sc.nextDouble();
+            }
+        }
+        return num;
+    }
+
+    public static double validateRadius(double num)
+    {
+        while (num >= 1000) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please enter the Radius:");
+                num = sc.nextDouble();
+            }
+        }
+        return num;
+    }
+
+    public static double validateHorizontalDistance(double num)
+    {
+        while (num >= 200) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please enter the the horizontal distance:");
+                num = sc.nextDouble();
+            }
+        }
+        return num;
+    }
+
+    public static double validateVerticalDistance(double num)
+    {
+        while (num >= 200) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please enter the the vertical distance:");
+                num = sc.nextDouble();
+            }
+        }
+        return num;
+    }
+
+    public static double validateSuperElevation(double num)
+    {
+        while (num >= 1) {
+            validatePrompt();
+            int validation = sc.nextInt();
+            if (validation == 1)
+                break;
+            else {
+                System.out.println("Please enter super-elevation(as decimal):");
+                num = sc.nextDouble();
+            }
+        }
+        return num;
     }
 
     public static void main(String[] args) {
@@ -41,17 +159,7 @@ public class Test extends DragFactor {
         System.out.println("Please input altitude(meters):");
         double r = sc.nextDouble();
 
-        //validates altitude
-        while (r >= 5000) {
-            validatePrompt();
-            int validation = sc.nextInt();
-            if (validation == 1)
-                break;
-            else {
-                System.out.println("Please input altitude(meters):");
-                r = sc.nextDouble();
-            }
-        }
+        r = validateAltitude(r); // validates the loop
 
         double g = 9.80665;
         double re = 6731009;
@@ -61,51 +169,21 @@ public class Test extends DragFactor {
             case 1:
                 System.out.println("Please input MPH:");
                 int mph = sc.nextInt();
-                //validates mph
-                while (mph >= 200) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please input MPH:");
-                        mph = sc.nextInt();
-                    }
-                }
+                mph = validateMPH(mph); // validates with the big boss man
 
                 System.out.println("Please input Wet or Dry:");
                 String wod = sc.next();
 
-                casePrompt(mph);
+                casePrompt(mph); // huge list of road types.
                 int road = sc.nextInt();
 
                 System.out.println("Please enter Final Velocity:");
                 double vf = sc.nextDouble();
-                //validates final velocity
-                while (vf >= 500) {
-
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please enter Final Velocity:");
-                        vf = sc.nextDouble();
-                    }
-                }
+                vf = validateFinalVelocity(vf);
 
                 System.out.println("Please enter Skid Distance(meters):");
                 double sd = sc.nextDouble();
-                //validates skid distance
-                while (sd >= 500) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please enter Skid Distance(meters):");
-                        sd = sc.nextDouble();
-                    }
-                }
+                sd = validateSkidDistance(sd);
 
                 if (mph < 30 && (wod.contains("dry") || wod.contains("Dry"))) {
                     switch (road) {
@@ -368,16 +446,7 @@ public class Test extends DragFactor {
                 System.out.println("Please input MPH:");
                 int mph2 = sc.nextInt();
                 //validates mph2
-                while (mph2 >= 200) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please input MPH:");
-                        mph2 = sc.nextInt();
-                    }
-                }
+                mph2 = validateMPH(mph2);
 
                 System.out.println("Please input Wet or Dry:");
                 String wod2 = sc.next();
@@ -388,30 +457,12 @@ public class Test extends DragFactor {
                 System.out.println("Please enter the Radius:");
                 double R = sc.nextDouble();
                 //validates radius
-                while (R >= 1000) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please enter the Radius:");
-                        R = sc.nextDouble();
-                    }
-                }
+                R = validateRadius(R);
 
                 System.out.println("Please enter super-elevation(as decimal):");
                 double e = sc.nextDouble();
                 //validates super-elevation
-                while (e >= 1) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please enter super-elevation(as decimal):");
-                        e = sc.nextDouble();
-                    }
-                }
+                e = validateSuperElevation(e);
 
                 if (mph2 < 30 && (wod2.contains("dry") || wod2.contains("Dry"))) {
                     switch (road2) {
@@ -604,7 +655,6 @@ public class Test extends DragFactor {
                     }
                 } else if (mph2 >= 30 && (wod2.contains("dry") || wod2.contains("Dry"))) {
                     switch (road2) {
-
                         case 1:
                             System.out.println("Drag factor: " + dcsmValue);
                             System.out.println("Velocity: " + (Math.sqrt(R * GF * (dcsmValue + e) / (1 - (dcsmValue * e)))));
@@ -674,44 +724,17 @@ public class Test extends DragFactor {
                 System.out.println("Please enter the the horizontal distance:");
                 double D = sc.nextDouble();
                 //validates horizontal distance
-                while (D >= 200) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please enter the the horizontal distance:");
-                        D = sc.nextDouble();
-                    }
-                }
+                D = validateHorizontalDistance(D);
 
                 System.out.println("Please enter the the vertical distance:");
                 double H = sc.nextDouble();
                 //validates vertical distance
-                while (H >= 200) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please enter the the vertical distance:");
-                        H = sc.nextDouble();
-                    }
-                }
+                H = validateVerticalDistance(H);
 
                 System.out.println("Please enter super-elevation(as decimal):");
                 double se = sc.nextDouble();
                 //validates super-elevation
-                while (se >= 1) {
-                    validatePrompt();
-                    int validation = sc.nextInt();
-                    if (validation == 1)
-                        break;
-                    else {
-                        System.out.println("Please enter super-elevation(as decimal):");
-                        se = sc.nextDouble();
-                    }
-                }
+                se = validateSuperElevation(se);
 
                 System.out.println("Velocity: " + (Math.sqrt(GF * Math.pow(D, 2)) / (2 * (H + (D * se)))));
 
