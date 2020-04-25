@@ -1,4 +1,4 @@
 public enum Weather {
-    DRY,
-    WET
+    WET,
+    DRY
 }

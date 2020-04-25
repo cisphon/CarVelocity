@@ -4,7 +4,7 @@ public class Test extends DragFactor {
     static Scanner sc = new Scanner(System.in);
 
     // this prints the cases
-    public static void casePrompt(int mph) {
+    public static void casePrompt(double mph) {
         System.out.println("MPH: " + mph);
         System.out.println("Please select road number:");
         System.out.println("1.Portland Cement: New, Sharp");
@@ -29,7 +29,7 @@ public class Test extends DragFactor {
         System.out.println("2.No");
     }
 
-    public static int validateMPH(int num) {
+    public static double validateMPH(double num) {
         while (num >= 200) {
             validatePrompt();
             int validation = sc.nextInt();
@@ -150,288 +150,293 @@ public class Test extends DragFactor {
 
     public static void main(String[] args) {
 
+        IncidentData data = new IncidentData();
+        VelocityCalculator vCalc = new VelocityCalculator();
+        
         System.out.println("Please select case number:");
         System.out.println("1.Skid Case");
         System.out.println("2.Yaw Case");
         System.out.println("3.Airborne Case");
-        int Case = sc.nextInt();
+
+        data.incidentCase = sc.nextInt();
 
         System.out.println("Please input altitude(meters):");
-        double r = sc.nextDouble();
+        data.altitude = sc.nextDouble();
 
-        r = validateAltitude(r); // validates the loop
+        data.altitude = validateAltitude(data.altitude); // validates the loop
 
-        double g = 9.80665;
-        double re = 6731009;
-        double GF = g * Math.pow((re / (re + r)), 2.0);
+        double GF = data.GRAVITY * Math.pow((data.RADIUS_OF_EARTH / (data.RADIUS_OF_EARTH + data.altitude)), 2.0);
 
-        switch (Case) {
+        switch (data.incidentCase) {
             case 1:
                 System.out.println("Please input MPH:");
-                int mph = sc.nextInt();
-                mph = validateMPH(mph); // validates with the big boss man
+                data.mph = sc.nextDouble();
+                data.mph = validateMPH(data.mph); // validates with the big boss man
 
-                System.out.println("Please input Wet or Dry:");
-                String wod = sc.next();
+                System.out.println("Please select Wet or Dry:");
+                System.out.println("1.Wet");
+                System.out.println("2.Dry");
+                data.weather = sc.nextInt() == 1 ? Weather.WET : Weather.DRY;
 
-                casePrompt(mph); // huge list of road types.
-                int road = sc.nextInt();
+                casePrompt(data.mph); // huge list of road types.
+
+                data.setRoadType(sc.nextInt()); // sets data.roadType
 
                 System.out.println("Please enter Final Velocity:");
-                double vf = sc.nextDouble();
-                vf = validateFinalVelocity(vf);
+                data.finalVelocity = sc.nextDouble();
+                data.finalVelocity = validateFinalVelocity(data.finalVelocity);
 
                 System.out.println("Please enter Skid Distance(meters):");
-                double sd = sc.nextDouble();
-                sd = validateSkidDistance(sd);
+                data.skidDistance = sc.nextDouble();
+                data.skidDistance = validateSkidDistance(data.skidDistance);
 
-                if (mph < 30 && (wod.contains("dry") || wod.contains("Dry"))) {
-                    switch (road) {
+                if (data.mph < 30 && (data.weather == Weather.DRY )) {
+                    switch (data.roadType) {
 
-                        case 1:
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + dcslValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcslValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcslValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + dctlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dctlValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dctlValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + dcplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + danlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * danlValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * danlValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + datlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * datlValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * datlValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + daplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * daplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * daplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + daelValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * daelValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * daelValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + dgplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dgplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dgplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + dgllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dgllValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dgllValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + dciplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dciplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dciplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + drclValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * drclValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * drclValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + dislValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dislValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dislValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + dsplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dsplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dsplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + dsllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dsllValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dsllValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
                             break;
                     }
-                } else if (mph < 30 && (wod.contains("wet") || wod.contains("Wet"))) {
-                    switch (road) {
+                } else if (data.mph < 30 && (data.weather == Weather.WET)) {
+                    switch (data.roadType) {
 
-                        case 1:
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + wcslValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcslValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcslValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + wctlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wctlValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wctlValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + wcplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + wanlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wanlValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wanlValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + watlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * watlValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * watlValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + waplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * waplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * waplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + waelValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * waelValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * waelValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + wgplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wgplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wgplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + wgllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wgllValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wgllValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + wciplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wciplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wciplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + wrclValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wrclValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wrclValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + wislValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wislValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wislValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + wsplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wsplValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wsplValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + wsllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wsllValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wsllValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
                             break;
                     }
-                } else if (mph >= 30 && (wod.contains("wet") || wod.contains("Wet"))) {
-                    switch (road) {
+                } else if (data.mph >= 30 && (data.weather == Weather.WET)) {
+                    switch (data.roadType) {
 
-                        case 1:
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + wcsmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcsmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcsmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + wctmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wctmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wctmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + wcpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcpmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcpmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + wanmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wanmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wanmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + watmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * watmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * watmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + wapmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wapmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wapmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + waemValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * waemValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * waemValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + wgpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wgpmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wgpmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + wglmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wglmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wglmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + wcipmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcipmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wcipmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + wrcmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wrcmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wrcmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + wismValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wismValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wismValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + wspmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wspmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wspmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + wslmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wslmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * wslmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
                             break;
                     }
-                } else if (mph >= 30 && (wod.contains("dry") || wod.contains("Dry"))) {
-                    switch (road) {
+                } else if (data.mph >= 30 && (data.weather == Weather.DRY )) {
+                    switch (data.roadType) {
 
-                        case 1:
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + dcsmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcsmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcsmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + dctmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dctmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dctmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + dcpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcpmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcpmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + danmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * danmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * danmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + datmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * datmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * datmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + dapmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dapmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dapmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + daemValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * daemValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * daemValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + dgpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dgpmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dgpmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + dglmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dglmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dglmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + dcipmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcipmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dcipmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + drcmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * drcmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * drcmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + dismValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dismValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dismValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + dspmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dspmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dspmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + dslmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dslmValue * GF * sd + Math.pow(vf, 2))));
+                            System.out.println("Velocity: " + (Math.sqrt(2.0 * dslmValue * GF * data.skidDistance + Math.pow(data.finalVelocity, 2))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -444,272 +449,278 @@ public class Test extends DragFactor {
 
             case 2:
                 System.out.println("Please input MPH:");
-                int mph2 = sc.nextInt();
+                data.mph = sc.nextInt();
+
                 //validates mph2
-                mph2 = validateMPH(mph2);
+                data.mph = validateMPH(data.mph);
 
-                System.out.println("Please input Wet or Dry:");
-                String wod2 = sc.next();
+                System.out.println("Please select Wet or Dry:");
+                System.out.println("1.Wet");
+                System.out.println("2.Dry");
+                data.weather = sc.nextInt() == 1 ? Weather.WET : Weather.DRY;
 
-                casePrompt(mph2);
-                int road2 = sc.nextInt();
+                casePrompt(data.mph);
+
+                data.setRoadType(sc.nextInt());
 
                 System.out.println("Please enter the Radius:");
-                double R = sc.nextDouble();
+                data.radius = sc.nextDouble();
+
                 //validates radius
-                R = validateRadius(R);
+                data.radius = validateRadius(data.radius);
 
                 System.out.println("Please enter super-elevation(as decimal):");
-                double e = sc.nextDouble();
+                data.superElevation = sc.nextDouble();
+
                 //validates super-elevation
-                e = validateSuperElevation(e);
+                data.superElevation = validateSuperElevation(data.superElevation);
 
-                if (mph2 < 30 && (wod2.contains("dry") || wod2.contains("Dry"))) {
-                    switch (road2) {
+                if (data.mph < 30 && (data.weather == Weather.DRY)) {
+                    switch (data.roadType) {
 
-                        case 1:
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + dcslValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * ((dcslValue + e) / (1 - (dcslValue * e))))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * ((dcslValue + data.superElevation) / (1 - (dcslValue * data.superElevation))))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + dctlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dctlValue + e) / (1 - (dctlValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dctlValue + data.superElevation) / (1 - (dctlValue * data.superElevation)))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + dcplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dcplValue + e) / (1 - (dcplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dcplValue + data.superElevation) / (1 - (dcplValue * data.superElevation)))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + danlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (danlValue + e) / (1 - (danlValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (danlValue + data.superElevation) / (1 - (danlValue * data.superElevation)))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + datlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (datlValue + e) / (1 - (datlValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (datlValue + data.superElevation) / (1 - (datlValue * data.superElevation)))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + daplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (daplValue + e) / (1 - (daplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (daplValue + data.superElevation) / (1 - (daplValue * data.superElevation)))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + daelValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (daelValue + e) / (1 - (daelValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (daelValue + data.superElevation) / (1 - (daelValue * data.superElevation)))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + dgplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dgplValue + e) / (1 - (dgplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dgplValue + data.superElevation) / (1 - (dgplValue * data.superElevation)))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + dgllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dgllValue + e) / (1 - (dgllValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dgllValue + data.superElevation) / (1 - (dgllValue * data.superElevation)))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + dciplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dciplValue + e) / (1 - (dciplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dciplValue + data.superElevation) / (1 - (dciplValue * data.superElevation)))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + drclValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (drclValue + e) / (1 - (drclValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (drclValue + data.superElevation) / (1 - (drclValue * data.superElevation)))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + dislValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dislValue + e) / (1 - (dislValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dislValue + data.superElevation) / (1 - (dislValue * data.superElevation)))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + dsplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dsplValue + e) / (1 - (dsplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dsplValue + data.superElevation) / (1 - (dsplValue * data.superElevation)))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + dsllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dsllValue + e) / (1 - (dsllValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dsllValue + data.superElevation) / (1 - (dsllValue * data.superElevation)))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
                             break;
                     }
-                } else if (mph2 < 30 && (wod2.contains("wet") || wod2.contains("Wet"))) {
-                    switch (road2) {
+                } else if (data.mph < 30 && (data.weather == Weather.WET)) {
+                    switch (data.roadType) {
 
-                        case 1:
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + wcslValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wcslValue + e) / (1 - (wcslValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wcslValue + data.superElevation) / (1 - (wcslValue * data.superElevation)))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + wctlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wctlValue + e) / (1 - (wctlValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wctlValue + data.superElevation) / (1 - (wctlValue * data.superElevation)))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + wcplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wcplValue + e) / (1 - (wcplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wcplValue + data.superElevation) / (1 - (wcplValue * data.superElevation)))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + wanlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wanlValue + e) / (1 - (wanlValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wanlValue + data.superElevation) / (1 - (wanlValue * data.superElevation)))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + watlValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (watlValue + e) / (1 - (watlValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (watlValue + data.superElevation) / (1 - (watlValue * data.superElevation)))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + waplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (waplValue + e) / (1 - (waplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (waplValue + data.superElevation) / (1 - (waplValue * data.superElevation)))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + waelValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (waelValue + e) / (1 - (waelValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (waelValue + data.superElevation) / (1 - (waelValue * data.superElevation)))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + wgplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wgplValue + e) / (1 - (wgplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wgplValue + data.superElevation) / (1 - (wgplValue * data.superElevation)))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + wgllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wgllValue + e) / (1 - (wgllValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wgllValue + data.superElevation) / (1 - (wgllValue * data.superElevation)))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + wciplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wciplValue + e) / (1 - (wciplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wciplValue + data.superElevation) / (1 - (wciplValue * data.superElevation)))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + wrclValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wrclValue + e) / (1 - (wrclValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wrclValue + data.superElevation) / (1 - (wrclValue * data.superElevation)))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + wislValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wislValue + e) / (1 - (wislValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wislValue + data.superElevation) / (1 - (wislValue * data.superElevation)))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + wsplValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wsplValue + e) / (1 - (wsplValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wsplValue + data.superElevation) / (1 - (wsplValue * data.superElevation)))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + wsllValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wsllValue + e) / (1 - (wsllValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wsllValue + data.superElevation) / (1 - (wsllValue * data.superElevation)))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
                             break;
                     }
-                } else if (mph2 >= 30 && (wod2.contains("wet") || wod2.contains("Wet"))) {
-                    switch (road2) {
+                } else if (data.mph >= 30 && (data.weather == Weather.WET)) {
+                    switch (data.roadType) {
 
-                        case 1:
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + wcsmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wcsmValue + e) / (1 - (wcsmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wcsmValue + data.superElevation) / (1 - (wcsmValue * data.superElevation)))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + wctmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wctmValue + e) / (1 - (wctmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wctmValue + data.superElevation) / (1 - (wctmValue * data.superElevation)))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + wcpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wcpmValue + e) / (1 - (wcpmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wcpmValue + data.superElevation) / (1 - (wcpmValue * data.superElevation)))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + wanmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wanmValue + e) / (1 - (wanmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wanmValue + data.superElevation) / (1 - (wanmValue * data.superElevation)))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + watmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (watmValue + e) / (1 - (watmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (watmValue + data.superElevation) / (1 - (watmValue * data.superElevation)))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + wapmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wapmValue + e) / (1 - (wapmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wapmValue + data.superElevation) / (1 - (wapmValue * data.superElevation)))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + waemValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (waemValue + e) / (1 - (waemValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (waemValue + data.superElevation) / (1 - (waemValue * data.superElevation)))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + wgpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wgpmValue + e) / (1 - (wgpmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wgpmValue + data.superElevation) / (1 - (wgpmValue * data.superElevation)))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + wglmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wglmValue + e) / (1 - (wglmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wglmValue + data.superElevation) / (1 - (wglmValue * data.superElevation)))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + wcipmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wcipmValue + e) / (1 - (wcipmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wcipmValue + data.superElevation) / (1 - (wcipmValue * data.superElevation)))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + wrcmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wrcmValue + e) / (1 - (wrcmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wrcmValue + data.superElevation) / (1 - (wrcmValue * data.superElevation)))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + wismValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wismValue + e) / (1 - (wismValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wismValue + data.superElevation) / (1 - (wismValue * data.superElevation)))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + wspmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wspmValue + e) / (1 - (wspmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wspmValue + data.superElevation) / (1 - (wspmValue * data.superElevation)))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + wslmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (wslmValue + e) / (1 - (wslmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (wslmValue + data.superElevation) / (1 - (wslmValue * data.superElevation)))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
                             break;
                     }
-                } else if (mph2 >= 30 && (wod2.contains("dry") || wod2.contains("Dry"))) {
-                    switch (road2) {
-                        case 1:
+                } else if (data.mph >= 30 && (data.weather == Weather.DRY)) {
+                    switch (data.roadType) {
+                        case CEMENT_NEW:
                             System.out.println("Drag factor: " + dcsmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dcsmValue + e) / (1 - (dcsmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dcsmValue + data.superElevation) / (1 - (dcsmValue * data.superElevation)))));
                             break;
-                        case 2:
+                        case CEMENT_TRAVELLED:
                             System.out.println("Drag factor: " + dctmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dctmValue + e) / (1 - (dctmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dctmValue + data.superElevation) / (1 - (dctmValue * data.superElevation)))));
                             break;
-                        case 3:
+                        case CEMENT_POLISHED:
                             System.out.println("Drag factor: " + dcpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dcpmValue + e) / (1 - (dcpmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dcpmValue + data.superElevation) / (1 - (dcpmValue * data.superElevation)))));
                             break;
-                        case 4:
+                        case ASPHALT_NEW:
                             System.out.println("Drag factor: " + danmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (danmValue + e) / (1 - (danmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (danmValue + data.superElevation) / (1 - (danmValue * data.superElevation)))));
                             break;
-                        case 5:
+                        case ASPHALT_TRAVELLED:
                             System.out.println("Drag factor: " + datmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (datmValue + e) / (1 - (datmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (datmValue + data.superElevation) / (1 - (datmValue * data.superElevation)))));
                             break;
-                        case 6:
+                        case ASPHALT_POLISHED:
                             System.out.println("Drag factor: " + dapmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dapmValue + e) / (1 - (dapmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dapmValue + data.superElevation) / (1 - (dapmValue * data.superElevation)))));
                             break;
-                        case 7:
+                        case ASPHALT_EXCESS:
                             System.out.println("Drag factor: " + daemValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (daemValue + e) / (1 - (daemValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (daemValue + data.superElevation) / (1 - (daemValue * data.superElevation)))));
                             break;
-                        case 8:
+                        case GRAVEL_PACKED:
                             System.out.println("Drag factor: " + dgpmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dgpmValue + e) / (1 - (dgpmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dgpmValue + data.superElevation) / (1 - (dgpmValue * data.superElevation)))));
                             break;
-                        case 9:
+                        case GRAVEL_LOOSE:
                             System.out.println("Drag factor: " + dglmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dglmValue + e) / (1 - (dglmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dglmValue + data.superElevation) / (1 - (dglmValue * data.superElevation)))));
                             break;
-                        case 10:
+                        case CINDERS_PACKED:
                             System.out.println("Drag factor: " + dcipmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dcipmValue + e) / (1 - (dcipmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dcipmValue + data.superElevation) / (1 - (dcipmValue * data.superElevation)))));
                             break;
-                        case 11:
+                        case ROCK_CRUSHED:
                             System.out.println("Drag factor: " + drcmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (drcmValue + e) / (1 - (drcmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (drcmValue + data.superElevation) / (1 - (drcmValue * data.superElevation)))));
                             break;
-                        case 12:
+                        case ICE_SMOOTH:
                             System.out.println("Drag factor: " + dismValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dismValue + e) / (1 - (dismValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dismValue + data.superElevation) / (1 - (dismValue * data.superElevation)))));
                             break;
-                        case 13:
+                        case SNOW_PACKED:
                             System.out.println("Drag factor: " + dspmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dspmValue + e) / (1 - (dspmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dspmValue + data.superElevation) / (1 - (dspmValue * data.superElevation)))));
                             break;
-                        case 14:
+                        case SNOW_LOOSE:
                             System.out.println("Drag factor: " + dslmValue);
-                            System.out.println("Velocity: " + (Math.sqrt(R * GF * (dslmValue + e) / (1 - (dslmValue * e)))));
+                            System.out.println("Velocity: " + (Math.sqrt(data.radius * GF * (dslmValue + data.superElevation) / (1 - (dslmValue * data.superElevation)))));
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -722,21 +733,22 @@ public class Test extends DragFactor {
 
             case 3:
                 System.out.println("Please enter the the horizontal distance:");
-                double D = sc.nextDouble();
+                data.horizontalDistance = sc.nextDouble();
                 //validates horizontal distance
-                D = validateHorizontalDistance(D);
+                data.horizontalDistance = validateHorizontalDistance(data.horizontalDistance);
 
                 System.out.println("Please enter the the vertical distance:");
-                double H = sc.nextDouble();
+                data.verticalDistance = sc.nextDouble();
                 //validates vertical distance
-                H = validateVerticalDistance(H);
+                data.verticalDistance = validateVerticalDistance(data.verticalDistance);
 
                 System.out.println("Please enter super-elevation(as decimal):");
-                double se = sc.nextDouble();
-                //validates super-elevation
-                se = validateSuperElevation(se);
+                data.superElevation = sc.nextDouble();
 
-                System.out.println("Velocity: " + (Math.sqrt(GF * Math.pow(D, 2)) / (2 * (H + (D * se)))));
+                //validates super-elevation
+                data.superElevation = validateSuperElevation(data.superElevation);
+
+                System.out.println("Velocity: " + (Math.sqrt(GF * Math.pow(data.horizontalDistance, 2)) / (2 * (data.verticalDistance + (data.horizontalDistance * data.superElevation)))));
 
                 break;
 
