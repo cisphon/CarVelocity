@@ -1,8 +1,29 @@
 import java.util.Scanner;
 
 public class Test extends DragFactor {
+    static Scanner sc = new Scanner(System.in);
+
+    // this prints the cases
+    public static void prompt(int mph) {
+        System.out.println("MPH: " + mph);
+        System.out.println("Please select road number:");
+        System.out.println("1.Portland Cement: New, Sharp");
+        System.out.println("2.Portland Cement: Travelled");
+        System.out.println("3.Portland Cement: Polished");
+        System.out.println("4.Asphalt or Tar: New, Sharp");
+        System.out.println("5.Asphalt or Tar: Travelled");
+        System.out.println("6.Asphalt or Tar: Polished");
+        System.out.println("7.Asphalt or Tar: Excess Tar");
+        System.out.println("8.Gravel: Packed, Oiled");
+        System.out.println("9.Gravel: Loose");
+        System.out.println("10.Cinders: Packed");
+        System.out.println("11.Rock: Crushed");
+        System.out.println("12.Ice: Smooth");
+        System.out.println("13.Snow: Packed");
+        System.out.println("14.Snow: Loose");
+    }
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Please select case number:");
         System.out.println("1.Skid Case");
@@ -51,22 +72,8 @@ public class Test extends DragFactor {
 
                 System.out.println("Please input Wet or Dry:");
                 String wod = sc.next();
-                System.out.println("MPH: " + mph);
-                System.out.println("Please select road number:");
-                System.out.println("1.Portland Cement: New, Sharp");
-                System.out.println("2.Portland Cement: Travelled");
-                System.out.println("3.Portland Cement: Polished");
-                System.out.println("4.Asphalt or Tar: New, Sharp");
-                System.out.println("5.Asphalt or Tar: Travelled");
-                System.out.println("6.Asphalt or Tar: Polished");
-                System.out.println("7.Asphalt or Tar: Excess Tar");
-                System.out.println("8.Gravel: Packed, Oiled");
-                System.out.println("9.Gravel: Loose");
-                System.out.println("10.Cinders: Packed");
-                System.out.println("11.Rock: Crushed");
-                System.out.println("12.Ice: Smooth");
-                System.out.println("13.Snow: Packed");
-                System.out.println("14.Snow: Loose");
+
+                prompt(mph);
                 int road = sc.nextInt();
 
                 System.out.println("Please enter Final Velocity:");
@@ -377,22 +384,8 @@ public class Test extends DragFactor {
 
                 System.out.println("Please input Wet or Dry:");
                 String wod2 = sc.next();
-                System.out.println("MPH: " + mph2);
-                System.out.println("Please select road number:");
-                System.out.println("1.Portland Cement: New, Sharp");
-                System.out.println("2.Portland Cement: Travelled");
-                System.out.println("3.Portland Cement: Polished");
-                System.out.println("4.Asphalt or Tar: New, Sharp");
-                System.out.println("5.Asphalt or Tar: Travelled");
-                System.out.println("6.Asphalt or Tar: Polished");
-                System.out.println("7.Asphalt or Tar: Excess Tar");
-                System.out.println("8.Gravel: Packed, Oiled");
-                System.out.println("9.Gravel: Loose");
-                System.out.println("10.Cinders: Packed");
-                System.out.println("11.Rock: Crushed");
-                System.out.println("12.Ice: Smooth");
-                System.out.println("13.Snow: Packed");
-                System.out.println("14.Snow: Loose");
+
+                prompt(mph2);
                 int road2 = sc.nextInt();
 
                 System.out.println("Please enter the Radius:");
@@ -422,7 +415,7 @@ public class Test extends DragFactor {
                     if (validation == 1)
                         break;
                     else {
-                    	System.out.println("Please enter super-elevation(as decimal):");
+                        System.out.println("Please enter super-elevation(as decimal):");
                         e = sc.nextDouble();
                     }
                 }
@@ -728,7 +721,7 @@ public class Test extends DragFactor {
                     if (validation == 1)
                         break;
                     else {
-                    	System.out.println("Please enter super-elevation(as decimal):");
+                        System.out.println("Please enter super-elevation(as decimal):");
                         se = sc.nextDouble();
                     }
                 }
