@@ -22,4 +22,9 @@ public class News {
         int index = (int) ((newsLinks.length) * random.nextDouble());
         return newsLinks[index];
     }
+
+    public void printNews()
+    {
+        System.out.println(getRandomNewsLink());
+    }
 }

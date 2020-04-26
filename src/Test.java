@@ -69,12 +69,13 @@ public class Test {
     }
 
     public static void main(String[] args) throws Exception {
-        VelocityCalculator vCalc = new VelocityCalculator(new IncidentData(), new FinalVelocity(), new DragFactor());
-        News news = new News();
-
         login();
 
+        VelocityCalculator vCalc = new VelocityCalculator(new IncidentData(), new FinalVelocity(), new DragFactor());
         vCalc.calculate();
+
+        News news = new News();
+        news.printNews();
     }
 }
 
