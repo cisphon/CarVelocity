@@ -69,12 +69,8 @@ public class Test {
     }
 
     public static void main(String[] args) throws Exception {
-
-        IncidentData data = new IncidentData();
-        FinalVelocity fVec = new FinalVelocity();
-        DragFactor dragFactor = new DragFactor();
+        VelocityCalculator vCalc = new VelocityCalculator(new IncidentData(), new FinalVelocity(), new DragFactor());
         News news = new News();
-        VelocityCalculator vCalc = new VelocityCalculator(data, fVec, dragFactor);
 
         login();
 

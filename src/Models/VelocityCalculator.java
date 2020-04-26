@@ -9,8 +9,7 @@ public class VelocityCalculator {
     FinalVelocity fVec;
     DragFactor dragFactor;
 
-    public VelocityCalculator(IncidentData data, FinalVelocity fVec, DragFactor dragFactor)
-    {
+    public VelocityCalculator(IncidentData data, FinalVelocity fVec, DragFactor dragFactor) {
         this.data = data;
         this.fVec = fVec;
         this.dragFactor = dragFactor;
@@ -157,9 +156,7 @@ public class VelocityCalculator {
         return num;
     }
 
-
-    public void calculate()
-    {
+    public void calculate() {
         System.out.println("Please select case number:");
         System.out.println("1.Skid Case");
         System.out.println("2.Yaw Case");
