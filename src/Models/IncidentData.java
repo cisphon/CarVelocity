@@ -1,40 +1,41 @@
+package Models;
 
 public class IncidentData {
-	  final double GRAVITY = 9.80665;
-	    final double RADIUS_OF_EARTH = 6731009;
+	  public final double GRAVITY = 9.80665;
+	  public final double RADIUS_OF_EARTH = 6731009;
 
-	    Weather weather;
+	  public Weather weather;
 
-	    RoadType roadType;
+	  public RoadType roadType;
 
-	    int incidentCase;
+	  public int incidentCase;
 
-	    double altitude;
+	  public double altitude;
 
-	    double mph;
+	  public double mph;
+
+	  public double skidTime;
+
+	  public double yawTime;
+
+	  public double airborneTime;
+
+	  public double finalVelocity;
+
+	  public double skidDistance;
+
+	  public double radius;
+
+	  public double superElevation;
+
+	  public double horizontalDistance;
+
+	  public double verticalDistance;
 	    
-	    double skidTime;
-	    
-	    double yawTime;
-	    
-	    double airborneTime;
-
-	    double finalVelocity;
-
-	    double skidDistance;
-
-	    double radius;
-
-	    double superElevation;
-
-	    double horizontalDistance;
-
-	    double verticalDistance;
-	    
-	    double hypotenuseDistance;
+	  public double hypotenuseDistance;
 	    
 
-	    void setRoadType(int caseNum) {
+	  public void setRoadType(int caseNum) {
 	        switch (caseNum) {
 	            case 1:
 	                roadType = RoadType.CEMENT_NEW;

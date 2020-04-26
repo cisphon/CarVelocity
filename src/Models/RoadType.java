@@ -1,3 +1,5 @@
+package Models;
+
 public enum RoadType {
     CEMENT_NEW,
     CEMENT_TRAVELLED,

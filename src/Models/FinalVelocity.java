@@ -1,17 +1,18 @@
+package Models;
 
 public class FinalVelocity {
     
-	double airborneVelocity;
+	public double airborneVelocity;
 	
-	double skidVelocity;
+	public double skidVelocity;
 	
-	double yawVelocity;
+	public double yawVelocity;
 	
-    double av;
+    public double av;
     
-    double sv;
+    public double sv;
     
-    double yv; 
+    public double yv;
 	
 	/**
 	double skidVelocityCementNew;
