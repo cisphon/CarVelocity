@@ -8,11 +8,11 @@ public class FinalVelocity {
 	
 	public double yawVelocity;
 	
-    public double av;
-    
-    public double sv;
-    
-    public double yv;
+//    public double av;
+//
+//    public double sv;
+//
+//    public double yv;
 	
 	/**
 	double skidVelocityCementNew;
