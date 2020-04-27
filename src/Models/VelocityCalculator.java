@@ -9,10 +9,10 @@ public class VelocityCalculator {
     FinalVelocity fVec;
     DragFactor dragFactor;
 
-    public VelocityCalculator(IncidentData data, FinalVelocity fVec, DragFactor dragFactor) {
-        this.data = data;
-        this.fVec = fVec;
-        this.dragFactor = dragFactor;
+    public VelocityCalculator() {
+        data = new IncidentData();
+        fVec = new FinalVelocity();
+        dragFactor = new DragFactor();
     }
 
     // this prints the cases

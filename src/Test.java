@@ -71,7 +71,7 @@ public class Test {
     public static void main(String[] args) throws Exception {
         login();
 
-        VelocityCalculator vCalc = new VelocityCalculator(new IncidentData(), new FinalVelocity(), new DragFactor());
+        VelocityCalculator vCalc = new VelocityCalculator();
         vCalc.calculate();
 
         News news = new News();
