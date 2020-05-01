@@ -8,53 +8,38 @@ import java.time.format.DateTimeFormatter;
 
 public class ReportBuilder {
 
-    public ReportBuilder(IncidentData data, String username) {
+    public ReportBuilder(IncidentData data, String username) throws IOException {
         createFile(data, username);
     }
 
-    private void createFile(IncidentData data, String username) {
-        try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime now = LocalDateTime.now();
+    private void createFile(IncidentData data, String username) throws IOException {
 
-            String dateTime= dtf.format(now);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
 
-            String accidentType = "";
+        String dateTime = dtf.format(now);
 
-            if (data.skidVelocity != 0) {
-                accidentType = "SKID";
-            }
-            else if (data.yawVelocity != 0) {
-                accidentType = "YAW";
-            }
-            else if (data.airborneVelocity != 0) {
-                accidentType = "AIRBORNE";
-            }
+        String accidentType = "";
 
-            long cT = System.currentTimeMillis() / 1000000; // for random file name really
-
-            boolean mkdirs = new File( "src/Reports/").mkdirs();
-            File report = new File( "src/Reports/"  + username + "_" + dateTime + "_" + accidentType + "_" + cT);
-            FileWriter writer = new FileWriter(report);
-            if (report.createNewFile()) { // create new file, false if already a file of that name
-
-                System.out.println("----------------");
-                System.out.println("File created: " + report.getName());
-
-                writeData(data, report, accidentType, username);
-
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        if (data.skidVelocity != 0) {
+            accidentType = "SKID";
+        } else if (data.yawVelocity != 0) {
+            accidentType = "YAW";
+        } else if (data.airborneVelocity != 0) {
+            accidentType = "AIRBORNE";
         }
+
+        long cT = System.currentTimeMillis() / 1000000; // for random file name really
+
+        boolean mkdirs = new File("src/Reports/").mkdirs();
+
+        File report = new File(username + "_" + dateTime + "_" + accidentType + "_" + cT);
+        writeData(data, report, accidentType, username);
     }
 
     private void writeData(IncidentData data, File file, String accidentType, String username) {
         try {
-            FileWriter myWriter = new FileWriter(file.getName());
+            FileWriter myWriter = new FileWriter("src/Reports/" + file.getName());
 
             if (accidentType == "SKID") {
                 myWriter.write("Username: " + username + "\n" +
@@ -62,11 +47,11 @@ public class ReportBuilder {
                         "MPH: " + data.mph + "\n" +
                         "Weather: " + data.weather + "\n" +
                         "Road Type: " + data.roadType + "\n" +
-                            "Drag Factor: " + data.dragFactorUsed + "\n" +
-                                "Final Velocity: " + data.finalVelocity + "\n" +
-                                "Skid Distance: " + data.skidDistance + "\n" +
-                                "Velocity: " + data.skidVelocity + "\n" +
-                                "Accident Time: " + data.accidentTime + "\n");
+                        "Drag Factor: " + data.dragFactorUsed + "\n" +
+                        "Final Velocity: " + data.finalVelocity + "\n" +
+                        "Skid Distance: " + data.skidDistance + "\n" +
+                        "Velocity: " + data.skidVelocity + "\n" +
+                        "Accident Time: " + data.accidentTime + "\n");
             }
             if (accidentType == "YAW") {
                 myWriter.write("Username: " + username + "\n" +
