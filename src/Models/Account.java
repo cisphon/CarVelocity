@@ -36,6 +36,7 @@ public class Account {
             String[] tokens = line.split(",");
 
             if (tokens[0].equals(uName)) {
+                sCase = 1;
                 accountType = AccountType.valueOf(tokens[2].toUpperCase());
                 break;
             }
