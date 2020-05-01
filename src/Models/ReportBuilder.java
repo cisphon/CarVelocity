@@ -10,7 +10,6 @@ public class ReportBuilder {
 
     public ReportBuilder(IncidentData data) {
         createFile(data);
-
     }
 
     private void createFile(IncidentData data) {
