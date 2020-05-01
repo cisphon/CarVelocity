@@ -16,6 +16,6 @@ Project requirements, cross out or add as needed
 
 2. To provide a simulation of traffic accident reconstruction (either by animation or simply by mentioning the speed at various times).
     
-    2.1. If a authorized personnel wants to see a previous saved traffic accident reconstruction, then the software system should provide this service for free.
+    ~~2.1. If a authorized personnel wants to see a previous saved traffic accident reconstruction, then the software system should provide this service for free.~~
 
-3. The system must be able of future expansion to incorporate information about more velocity estimation and how to expand them in the future.
+~~3. The system must be able of future expansion to incorporate information about more velocity estimation and how to expand them in the future.~~
