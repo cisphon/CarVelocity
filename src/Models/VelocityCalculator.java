@@ -395,13 +395,17 @@ public class VelocityCalculator {
                 data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF, data.skidDistance, data.finalVelocity);
                 System.out.println("Velocity: " + data.skidVelocity);
 
+                // calculate skid time
                 data.skidTime = data.skidDistance / data.skidVelocity;
                 System.out.println("Time: " + data.skidTime);
 
-                for (data.accidentTime = 1; data.accidentTime <= data.skidTime; data.accidentTime++) {
-                    data.skidVelocity = data.skidVelocity * data.accidentTime / data.skidTime;
-                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.skidVelocity);
-                }
+
+                //TODO reconstruct velocity at time t
+
+//                for (data.accidentTime = 1; data.accidentTime <= data.skidTime; data.accidentTime++) {
+//                    data.skidVelocity = data.skidVelocity * data.accidentTime / data.skidTime;
+//                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.skidVelocity);
+//                }
 
                 break;
 
@@ -625,15 +629,23 @@ public class VelocityCalculator {
 
                 // dragFactorUsed is assigned in cases
                 System.out.println("Drag factor: " + data.dragFactorUsed);
+
+                // calculate velocity
                 data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF, data.radius, data.superElevation);
                 System.out.println("Velocity: " + data.yawVelocity);
 
+                // calculate yaw time
                 data.yawTime = data.radius / data.yawVelocity;
                 System.out.println("Time: " + data.yawTime);
-                for (data.accidentTime = 1; data.accidentTime <= data.yawTime; data.accidentTime++) {
-                    data.yawVelocity = data.yawVelocity * data.accidentTime / data.yawTime;
-                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.yawVelocity);
-                }
+
+                //TODO reconstruct velocity at time t
+
+//                for (data.accidentTime = 1; data.accidentTime <= data.yawTime; data.accidentTime++) {
+//                    data.yawVelocity = data.yawVelocity * data.accidentTime / data.yawTime;
+//                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.yawVelocity);
+//                }
+
+
                 break;
 
             case 3:
@@ -651,15 +663,19 @@ public class VelocityCalculator {
                 data.superElevation = sc.nextDouble();
 
                 data.airborneVelocity = calculateAirborneVelocity(GF, data.horizontalDistance, data.verticalDistance, data.superElevation);
-
                 System.out.println("Velocity: " + data.airborneVelocity);
 
+                // calculate airborne time
                 data.airborneTime = data.hypotenuseDistance / data.airborneVelocity;
+                System.out.println("Time: " + data.airborneTime);
 
-                for (data.accidentTime = 1; data.accidentTime <= data.airborneTime; data.accidentTime = data.accidentTime + 4) {
-                    data.airborneVelocity = data.airborneVelocity * data.accidentTime / data.airborneTime;
-                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.airborneVelocity);
-                }
+
+                //TODO reconstruct velocity at time t
+
+//                for (data.accidentTime = 1; data.accidentTime <= data.airborneTime; data.accidentTime = data.accidentTime + 4) {
+//                    data.airborneVelocity = data.airborneVelocity * data.accidentTime / data.airborneTime;
+//                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.airborneVelocity);
+//                }
 
                 break;
 
