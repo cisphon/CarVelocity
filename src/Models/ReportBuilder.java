@@ -7,14 +7,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReportBuilder {
-
-    public ReportBuilder(IncidentData data) {
-        createFile(data);
+    
+    public ReportBuilder(IncidentData data, String username) {
+        createFile(data, username);
     }
 
-    private void createFile(IncidentData data) {
+    private void createFile(IncidentData data, String username) {
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
 
             String dateTime= dtf.format(now);
@@ -31,13 +31,15 @@ public class ReportBuilder {
                 accidentType = "AIRBORNE";
             }
 
-            File report = new File("src/Reports/" + dateTime + "_" + accidentType);
+            long cT = System.currentTimeMillis() / 1000000;
+
+            File report = new File( "src/Reports/" + username + "_" + dateTime + "_" + accidentType + "_" + cT);
             if (report.createNewFile()) { // create new file, false if already a file of that name
 
                 System.out.println("----------------");
                 System.out.println("File created: " + report.getName());
 
-                writeData(data, report, accidentType);
+                writeData(data, report, accidentType, username);
 
             } else {
                 System.out.println("File already exists.");
@@ -48,12 +50,14 @@ public class ReportBuilder {
         }
     }
 
-    private void writeData(IncidentData data, File file, String accidentType) {
+    private void writeData(IncidentData data, File file, String accidentType, String username) {
         try {
             FileWriter myWriter = new FileWriter(file.getName());
 
             if (accidentType == "SKID") {
-                myWriter.write("MPH: " + data.mph + "\n" +
+                myWriter.write("Username: " + username + "\n" +
+                        "Time of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
+                        "MPH: " + data.mph + "\n" +
                         "Weather: " + data.weather + "\n" +
                         "Road Type: " + data.roadType + "\n" +
                             "Drag Factor: " + data.dragFactorUsed + "\n" +
@@ -63,7 +67,8 @@ public class ReportBuilder {
                                 "Accident Time: " + data.accidentTime + "\n");
             }
             if (accidentType == "YAW") {
-                myWriter.write("MPH: " + data.mph + "\n" +
+                myWriter.write("Username: " + username + "\n" +
+                        "MPH: " + data.mph + "\n" +
                         "Weather: " + data.weather + "\n" +
                         "Road Type: " + data.roadType + "\n" +
                         "Drag Factor: " + data.dragFactorUsed + "\n" +
@@ -72,7 +77,8 @@ public class ReportBuilder {
                         "Accident Time: " + data.accidentTime + "\n");
             }
             if (accidentType == "AIRBORNE") {
-                myWriter.write("Horizontal Distance: " + data.horizontalDistance + "\n" +
+                myWriter.write("Username: " + username + "\n" +
+                        "Horizontal Distance: " + data.horizontalDistance + "\n" +
                         "Vertical Distance: " + data.verticalDistance + "\n" +
                         "Super Elevation: " + data.superElevation + "\n" +
                         "Velocity: " + data.airborneVelocity + "\n" +

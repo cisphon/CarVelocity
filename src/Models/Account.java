@@ -10,6 +10,9 @@ public class Account {
     private static Scanner sc = new Scanner(System.in);
     private static int adminKey = 123;
 
+    private String username;
+    private String password;
+
     private AccountType accountType;
 
     public Account() {
@@ -27,7 +30,7 @@ public class Account {
         //asks for username
         System.out.println("Please enter login information: ");
         System.out.print("Username: ");
-        String uName = sc.next();
+        username = sc.next();
 
         //checks database to see if username already exists in database
         int sCase = 0;
@@ -35,7 +38,7 @@ public class Account {
         while (line != null) {
             String[] tokens = line.split(",");
 
-            if (tokens[0].equals(uName)) {
+            if (tokens[0].equals(username)) {
                 sCase = 1;
                 accountType = AccountType.valueOf(tokens[2].toUpperCase());
                 break;
@@ -43,7 +46,7 @@ public class Account {
             line = br.readLine();
         }
 
-        String password, privilege, updated;
+        String privilege, updated;
         int key = 0;
         boolean valid = false;
 
@@ -51,7 +54,7 @@ public class Account {
         switch (sCase) {
             case 0:
                 System.out.println("Username not found!");
-                System.out.println("Enter a password to create an account with username '" + uName + "'");
+                System.out.println("Enter a password to create an account with username '" + username + "'");
                 System.out.print("Password: ");
                 password = sc.next();
 
@@ -75,7 +78,7 @@ public class Account {
 
                 accountType = AccountType.valueOf(privilege.toUpperCase());
 
-                updated = uName + "," + password + "," + privilege;
+                updated = username + "," + password + "," + privilege;
                 writer.write(updated + System.lineSeparator());
                 writer.close();
                 System.out.println("New account created!");
@@ -111,5 +114,9 @@ public class Account {
         } while (choice != 1 && choice != 2);
 
         return choice;
+    }
+
+    public String currentUser() {
+        return username;
     }
 }

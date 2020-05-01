@@ -18,7 +18,7 @@ public class Test {
         {
             VelocityCalculator vCalc = new VelocityCalculator();
 
-            ReportBuilder reportBuilder = new ReportBuilder(vCalc.calculate());
+            ReportBuilder reportBuilder = new ReportBuilder(vCalc.calculate(), account.currentUser());
         }
 
         News news = new News();
