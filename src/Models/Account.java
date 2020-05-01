@@ -10,6 +10,8 @@ public class Account {
     private static Scanner sc = new Scanner(System.in);
     private static int adminKey = 123;
 
+    private AccountType accountType;
+
     public Account() {
 
     }
@@ -32,8 +34,10 @@ public class Account {
         int sCase = 0;
         String line = br.readLine();
         while (line != null) {
-            if (line.contains(uName)) {
-                sCase = 1;
+            String[] tokens = line.split(",");
+
+            if (tokens[0].equals(uName)) {
+                accountType = AccountType.valueOf(tokens[2].toUpperCase());
                 break;
             }
             line = br.readLine();
@@ -56,8 +60,7 @@ public class Account {
                     System.out.print("Choose privilege (user or admin): ");
                     privilege = sc.next();
 
-                    if (privilege.equalsIgnoreCase("admin"))
-                    {
+                    if (privilege.equalsIgnoreCase("admin")) {
                         for (int i = 3; i >= 1; --i) // three tries
                         {
                             System.out.printf("Input the adminKey for approval (%d tries left): ", i);
@@ -65,11 +68,12 @@ public class Account {
                             if (key == adminKey)
                                 break;
                         }
-                    } else if (privilege.equalsIgnoreCase("user"))
-                    {
+                    } else if (privilege.equalsIgnoreCase("user")) {
                         break;
                     }
                 } while (key != adminKey);
+
+                accountType = AccountType.valueOf(privilege.toUpperCase());
 
                 updated = uName + "," + password + "," + privilege;
                 writer.write(updated + System.lineSeparator());
@@ -85,6 +89,7 @@ public class Account {
                     if (temp[1].contains(password)) {
                         System.out.println("Access Granted");
                         valid = true;
+                        accountType = AccountType.valueOf(temp[2].toUpperCase());
                     } else {
                         System.out.println("Incorrect password, try again");
                     }
@@ -92,5 +97,8 @@ public class Account {
         }
         br.close();
         //login block ends
+
+        // testing purposes
+        //System.out.println(accountType);
     }
 }
