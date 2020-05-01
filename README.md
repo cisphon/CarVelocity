@@ -12,7 +12,7 @@ Project requirements, cross out or add as needed
 
     1.5. To generate a report about the traffic accident reconstruction justifying the results.
 
-    1.6. To inform the customers about other related news on safe driving.
+    ~~1.6. To inform the customers about other related news on safe driving.~~
 
 2. To provide a simulation of traffic accident reconstruction (either by animation or simply by mentioning the speed at various times).
     
