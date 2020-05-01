@@ -33,7 +33,9 @@ public class ReportBuilder {
 
             long cT = System.currentTimeMillis() / 1000000; // for random file name really
 
-            File report = new File( "src/Reports/" + username + "_" + dateTime + "_" + accidentType + "_" + cT);
+            boolean mkdirs = new File( "src/Reports/").mkdirs();
+            File report = new File( "src/Reports/"  + username + "_" + dateTime + "_" + accidentType + "_" + cT);
+            FileWriter writer = new FileWriter(report);
             if (report.createNewFile()) { // create new file, false if already a file of that name
 
                 System.out.println("----------------");
