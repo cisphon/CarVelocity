@@ -31,8 +31,10 @@ public class ReportBuilder {
                 accidentType = "AIRBORNE";
             }
 
-            File report = new File(dateTime + "_" + accidentType);
+            File report = new File("src/Reports/" + dateTime + "_" + accidentType);
             if (report.createNewFile()) { // create new file, false if already a file of that name
+
+                System.out.println("----------------");
                 System.out.println("File created: " + report.getName());
 
                 writeData(data, report, accidentType);
@@ -77,7 +79,8 @@ public class ReportBuilder {
                         "Accident Time: " + data.accidentTime + "\n");
             }
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("Successfully wrote to " + file.getName());
+            System.out.println("----------------");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
