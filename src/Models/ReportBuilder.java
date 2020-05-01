@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
 
 public class ReportBuilder {
 
-    public ReportBuilder(IncidentData data, String username) throws IOException {
+    public ReportBuilder(IncidentData data, String username) {
         createFile(data, username);
     }
 
-    private void createFile(IncidentData data, String username) throws IOException {
+    private void createFile(IncidentData data, String username) {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
@@ -29,11 +29,13 @@ public class ReportBuilder {
             accidentType = "AIRBORNE";
         }
 
-        long cT = System.currentTimeMillis() / 1000000; // for random file name really
+        long cT = System.currentTimeMillis() / 1000000000; // for random file name really
 
-        boolean mkdirs = new File("src/Reports/").mkdirs();
+        boolean mkdirs = new File("src/Reports/").mkdirs(); // creates a new "Reports" directory if DoE
 
+        // file with name
         File report = new File(username + "_" + dateTime + "_" + accidentType + "_" + cT);
+
         writeData(data, report, accidentType, username);
     }
 
@@ -43,7 +45,7 @@ public class ReportBuilder {
 
             if (accidentType == "SKID") {
                 myWriter.write("Username: " + username + "\n" +
-                        "Time of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
+                        "Date of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
                         "MPH: " + data.mph + "\n" +
                         "Weather: " + data.weather + "\n" +
                         "Road Type: " + data.roadType + "\n" +
@@ -51,29 +53,30 @@ public class ReportBuilder {
                         "Final Velocity: " + data.finalVelocity + "\n" +
                         "Skid Distance: " + data.skidDistance + "\n" +
                         "Velocity: " + data.skidVelocity + "\n" +
-                        "Accident Time: " + data.accidentTime + "\n");
+                        "Accident Time: " + data.skidTime + "\n");
             }
             if (accidentType == "YAW") {
                 myWriter.write("Username: " + username + "\n" +
-                        "Time of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
+                        "Date of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
                         "MPH: " + data.mph + "\n" +
                         "Weather: " + data.weather + "\n" +
                         "Road Type: " + data.roadType + "\n" +
                         "Drag Factor: " + data.dragFactorUsed + "\n" +
                         "Radius: " + data.radius + "\n" +
                         "Velocity: " + data.yawVelocity + "\n" +
-                        "Accident Time: " + data.accidentTime + "\n");
+                        "Accident Time: " + data.yawTime + "\n");
             }
             if (accidentType == "AIRBORNE") {
                 myWriter.write("Username: " + username + "\n" +
-                        "Time of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
+                        "Date of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
                         "Horizontal Distance: " + data.horizontalDistance + "\n" +
                         "Vertical Distance: " + data.verticalDistance + "\n" +
                         "Super Elevation: " + data.superElevation + "\n" +
                         "Velocity: " + data.airborneVelocity + "\n" +
-                        "Accident Time: " + data.accidentTime + "\n");
+                        "Accident Time: " + data.airborneTime + "\n");
             }
             myWriter.close();
+            System.out.println("----------------");
             System.out.println("Successfully wrote to " + file.getName());
             System.out.println("----------------");
         } catch (IOException e) {
