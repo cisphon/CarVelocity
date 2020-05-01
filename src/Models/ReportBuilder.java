@@ -55,6 +55,7 @@ public class ReportBuilder {
             }
             if (accidentType == "YAW") {
                 myWriter.write("Username: " + username + "\n" +
+                        "Time of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
                         "MPH: " + data.mph + "\n" +
                         "Weather: " + data.weather + "\n" +
                         "Road Type: " + data.roadType + "\n" +
@@ -65,6 +66,7 @@ public class ReportBuilder {
             }
             if (accidentType == "AIRBORNE") {
                 myWriter.write("Username: " + username + "\n" +
+                        "Time of program calculation: " + java.util.Calendar.getInstance().getTime() + "\n" +
                         "Horizontal Distance: " + data.horizontalDistance + "\n" +
                         "Vertical Distance: " + data.verticalDistance + "\n" +
                         "Super Elevation: " + data.superElevation + "\n" +
