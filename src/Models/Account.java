@@ -13,7 +13,7 @@ public class Account {
     private String username;
     private String password;
 
-    private AccountType accountType;
+    public AccountType accountType;
 
     public Account() {
 

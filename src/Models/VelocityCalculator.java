@@ -561,6 +561,7 @@ public class VelocityCalculator {
 
                 data.skidTime = data.skidDistance / data.skidVelocity;
                 System.out.println("Time: " + data.skidTime);
+
                 for (data.accidentTime = 1; data.accidentTime <= data.skidTime; data.accidentTime++) {
                     data.skidVelocity = data.skidVelocity * data.accidentTime / data.skidTime;
                     System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.skidVelocity);

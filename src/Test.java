@@ -12,7 +12,7 @@ public class Test {
         account.login();
 
         int choice = account.choice();
-        if (choice == 1) // load old data
+        if (choice == 1 && account.accountType == AccountType.ADMIN) // load old data
         {
             ; //
         }
