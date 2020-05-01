@@ -22,8 +22,7 @@ public class Account {
         File loginDatabase = new File("src/loginDatabase");
         loginDatabase.createNewFile();
         FileWriter writer = new FileWriter(loginDatabase, true);
-        FileReader file_reader = new FileReader(loginDatabase);
-        BufferedReader br = new BufferedReader(file_reader);
+        BufferedReader br = new BufferedReader(new FileReader(loginDatabase));
 
         //asks for username
         System.out.println("Please enter login information: ");
@@ -100,5 +99,20 @@ public class Account {
 
         // testing purposes
         //System.out.println(accountType);
+    }
+
+    public void choice() {
+        System.out.println("1. See previous data");
+        System.out.println("2. Calculate new data");
+        int choice = sc.nextInt();
+
+        if (choice == 1)
+        {
+            ; //
+        }
+        else if (choice == 2) {
+            VelocityCalculator vCalc = new VelocityCalculator();
+            vCalc.calculate();
+        }
     }
 }
