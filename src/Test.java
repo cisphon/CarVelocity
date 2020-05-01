@@ -17,7 +17,6 @@ public class Test {
         else if (choice == 2) // calc new data
         {
             VelocityCalculator vCalc = new VelocityCalculator();
-            vCalc.calculate();
 
             ReportBuilder reportBuilder = new ReportBuilder(vCalc.calculate());
         }
