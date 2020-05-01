@@ -108,7 +108,7 @@ public class Account {
             System.out.println("1. See previous data");
             System.out.println("2. Calculate new data");
             choice = sc.nextInt();
-        } while (choice != 1 || choice != 2);
+        } while (choice != 1 && choice != 2);
 
         return choice;
     }
