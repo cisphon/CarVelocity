@@ -8,7 +8,19 @@ public class Test {
     public static void main(String[] args) throws Exception {
         Account account = new Account();
         account.login();
-        account.choice();
+
+        int choice = account.choice();
+        if (choice == 1) // load old data
+        {
+            ; //
+        }
+        else if (choice == 2) // calc new data
+        {
+            VelocityCalculator vCalc = new VelocityCalculator();
+            vCalc.calculate();
+
+            ReportBuilder reportBuilder = new ReportBuilder(vCalc.calculate());
+        }
 
         News news = new News();
         news.printNews();

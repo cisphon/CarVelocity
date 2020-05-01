@@ -101,20 +101,14 @@ public class Account {
         //System.out.println(accountType);
     }
 
-    public void choice() {
-        System.out.println("1. See previous data");
-        System.out.println("2. Calculate new data");
-        int choice = sc.nextInt();
+    public int choice() {
+        int choice;
+        do {
+            System.out.println("1. See previous data");
+            System.out.println("2. Calculate new data");
+            choice = sc.nextInt();
+        } while (choice != 1 || choice != 2);
 
-        if (choice == 1)    
-        {
-            ; //
-        }
-        else if (choice == 2) {
-            VelocityCalculator vCalc = new VelocityCalculator();
-            vCalc.calculate();
-
-            ReportBuilder reportBuilder = new ReportBuilder(vCalc.calculate());
-        }
+        return choice;
     }
 }
