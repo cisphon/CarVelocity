@@ -72,7 +72,8 @@ public class Test {
         login();
 
         VelocityCalculator vCalc = new VelocityCalculator();
-        vCalc.calculate();
+
+        ReportBuilder reportBuilder = new ReportBuilder(vCalc.calculate());
 
         News news = new News();
         news.printNews();

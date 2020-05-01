@@ -35,6 +35,16 @@ public class IncidentData {
     public double hypotenuseDistance;
 
 
+    public double airborneVelocity;
+
+    public double skidVelocity;
+
+    public double yawVelocity;
+
+    public double accidentTime;
+
+    public double dragFactorUsed;
+
     public void setRoadType(int caseNum) {
         switch (caseNum) {
             case 1:

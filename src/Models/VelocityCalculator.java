@@ -6,12 +6,10 @@ public class VelocityCalculator {
 
     Scanner sc = new Scanner(System.in);
     IncidentData data;
-    FinalVelocity fVec;
     DragFactor dragFactor;
 
     public VelocityCalculator() {
         data = new IncidentData();
-        fVec = new FinalVelocity();
         dragFactor = new DragFactor();
     }
 
@@ -156,7 +154,7 @@ public class VelocityCalculator {
         return num;
     }
 
-    public void calculate() {
+    public IncidentData calculate() {
         System.out.println("Please select case number:");
         System.out.println("1.Skid Case");
         System.out.println("2.Yaw Case");
@@ -197,74 +195,88 @@ public class VelocityCalculator {
                     switch (data.roadType) {
 
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.dcslValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dcslValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dcslValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.dctlValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dctlValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dctlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.dcplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dcplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dcplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.danlValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.danlValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.danlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.datlValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.datlValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.datlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.daplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.daplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.daplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.daelValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.daelValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.daelValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed );
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed , GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dgplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dgplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dgplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dgllValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dgllValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dgllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dciplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dciplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dciplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.drclValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.drclValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.drclValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.dislValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dislValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dislValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dsplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dsplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dsplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dsllValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dsllValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dsllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -274,74 +286,88 @@ public class VelocityCalculator {
                     switch (data.roadType) {
 
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wcslValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wcslValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wcslValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.wctlValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wctlValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wctlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.wcplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wcplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wcplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wanlValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wanlValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wanlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.watlValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.watlValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.watlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.waplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.waplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.waplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.waelValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.waelValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.waelValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wgplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wgplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wgplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wgllValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wgllValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wgllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wciplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wciplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wciplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.wrclValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wrclValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wrclValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.wislValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wislValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wislValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wsplValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wsplValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wsplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wsllValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wsllValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wsllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -351,74 +377,88 @@ public class VelocityCalculator {
                     switch (data.roadType) {
 
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wcsmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wcsmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wcsmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.wctmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wctmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wctmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.wcpmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wcpmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wcpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wanmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wanmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wanmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.watmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.watmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.watmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.wapmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wapmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wapmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.waemValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.waemValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.waemValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wgpmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wgpmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wgpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wglmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wglmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wglmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wcipmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wcipmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wcipmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.wrcmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wrcmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wrcmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.wismValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wismValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wismValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wspmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wspmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wspmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wslmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.wslmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.wslmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -428,74 +468,88 @@ public class VelocityCalculator {
                     switch (data.roadType) {
 
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.dcsmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dcsmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dcsmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.dctmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dctmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dctmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.dcpmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dcpmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dcpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.danmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.danmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.danmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.datmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.datmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.datmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.dapmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dapmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dapmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.daemValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.daemValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.daemValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dgpmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dgpmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dgpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dglmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dglmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dglmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dcipmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dcipmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dcipmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.drcmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.drcmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.drcmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.dismValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dismValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dismValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dspmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dspmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dspmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dslmValue);
-                            fVec.skidVelocity = calculateSkidVelocity(dragFactor.dslmValue, GF);
-                            System.out.println("Velocity: " + fVec.skidVelocity);
+                            data.dragFactorUsed = dragFactor.dslmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.skidVelocity = calculateSkidVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.skidVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -505,11 +559,11 @@ public class VelocityCalculator {
                     System.out.println("Error");
                 }
 
-                data.skidTime = data.skidDistance / fVec.skidVelocity;
+                data.skidTime = data.skidDistance / data.skidVelocity;
                 System.out.println("Time: " + data.skidTime);
-                for (double t = 1; t <= data.skidTime; t++) {
-                    fVec.skidVelocity = fVec.skidVelocity * t / data.skidTime;
-                    System.out.println("Time (Seconds): " + t + " " + "Velocity: " + fVec.skidVelocity);
+                for (data.accidentTime = 1; data.accidentTime <= data.skidTime; data.accidentTime++) {
+                    data.skidVelocity = data.skidVelocity * data.accidentTime / data.skidTime;
+                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.skidVelocity);
                 }
 
                 break;
@@ -536,84 +590,92 @@ public class VelocityCalculator {
                 //validates radius
                 data.radius = validateRadius(data.radius);
 
-                System.out.println("Please enter super-elevation(as decimal):");
-                data.superElevation = sc.nextDouble();
-
-                //validates super-elevation
-                data.superElevation = validateSuperElevation(data.superElevation);
-
                 if (data.mph < 30 && (data.weather == Weather.DRY)) {
                     switch (data.roadType) {
 
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.dcslValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dcslValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dcslValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.dctlValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dctlValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dctlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.dcplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dcplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dcplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.danlValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.danlValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.danlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.datlValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.datlValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.datlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.daplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.daplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.daplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.daelValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.daelValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.daelValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dgplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dgplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dgplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dgllValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dgllValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dgllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dciplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dciplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dciplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.drclValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.drclValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.drclValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.dislValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dislValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dislValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dsplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dsplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dsplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dsllValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dsllValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dsllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -623,74 +685,88 @@ public class VelocityCalculator {
                     switch (data.roadType) {
 
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wcslValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wcslValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wcslValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.wctlValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wctlValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wctlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.wcplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wcplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wcplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wanlValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wanlValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wanlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.watlValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.watlValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.watlValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.waplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.waplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.waplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.waelValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.waelValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.waelValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wgplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wgplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wgplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wgllValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wgllValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wgllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wciplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wciplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wciplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.wrclValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wrclValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wrclValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.wislValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wislValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wislValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wsplValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wsplValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wsplValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wsllValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wsllValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wsllValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -700,74 +776,88 @@ public class VelocityCalculator {
                     switch (data.roadType) {
 
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wcsmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wcsmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wcsmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.wctmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wctmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wctmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.wcpmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wcpmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wcpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.wanmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wanmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wanmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.watmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.watmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.watmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.wapmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wapmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wapmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.waemValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.waemValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.waemValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wgpmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dcslValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wgpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wglmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wglmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wglmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wcipmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wcipmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wcipmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.wrcmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wrcmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wrcmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.wismValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wismValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wismValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.wspmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wspmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wspmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.wslmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.wslmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.wslmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -776,74 +866,88 @@ public class VelocityCalculator {
                 } else if (data.mph >= 30 && (data.weather == Weather.DRY)) {
                     switch (data.roadType) {
                         case CEMENT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.dcsmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dcsmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dcsmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.dctmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dctmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dctmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CEMENT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.dcpmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dcpmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dcpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_NEW:
-                            System.out.println("Drag factor: " + dragFactor.danmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.danmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.danmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_TRAVELLED:
-                            System.out.println("Drag factor: " + dragFactor.datmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.datmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.datmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_POLISHED:
-                            System.out.println("Drag factor: " + dragFactor.dapmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dapmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dapmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ASPHALT_EXCESS:
-                            System.out.println("Drag factor: " + dragFactor.daemValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.daemValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.daemValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dgpmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dgpmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dgpmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case GRAVEL_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dglmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dglmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dglmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case CINDERS_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dcipmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dcipmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dcipmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ROCK_CRUSHED:
-                            System.out.println("Drag factor: " + dragFactor.drcmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.drcmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.drcmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case ICE_SMOOTH:
-                            System.out.println("Drag factor: " + dragFactor.dismValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dismValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dismValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_PACKED:
-                            System.out.println("Drag factor: " + dragFactor.dspmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dspmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dspmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         case SNOW_LOOSE:
-                            System.out.println("Drag factor: " + dragFactor.dslmValue);
-                            fVec.yawVelocity = calculateYawVelocity(dragFactor.dslmValue, GF);
-                            System.out.println("Velocity: " + fVec.yawVelocity);
+                            data.dragFactorUsed = dragFactor.dslmValue;
+                            System.out.println("Drag factor: " + data.dragFactorUsed);
+                            data.yawVelocity = calculateYawVelocity(data.dragFactorUsed, GF);
+                            System.out.println("Velocity: " + data.yawVelocity);
                             break;
                         default:
                             System.out.println("Select Road Surface");
@@ -853,11 +957,11 @@ public class VelocityCalculator {
                     System.out.println("Error");
                 }
 
-                data.yawTime = data.radius / fVec.yawVelocity;
+                data.yawTime = data.radius / data.yawVelocity;
                 System.out.println("Time: " + data.yawTime);
-                for (double t = 1; t <= data.yawTime; t++) {
-                    fVec.yawVelocity = fVec.yawVelocity * t / data.yawTime;
-                    System.out.println("Time (Seconds): " + t + " " + "Velocity: " + fVec.yawVelocity);
+                for (data.accidentTime = 1; data.accidentTime <= data.yawTime; data.accidentTime++) {
+                    data.yawVelocity = data.yawVelocity * data.accidentTime / data.yawTime;
+                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.yawVelocity);
                 }
                 break;
 
@@ -875,15 +979,15 @@ public class VelocityCalculator {
                 System.out.println("Please enter super-elevation(as decimal):");
                 data.superElevation = sc.nextDouble();
 
-                fVec.airborneVelocity = calculateAirborneVelocity(GF);
+                data.airborneVelocity = calculateAirborneVelocity(GF);
 
-                System.out.println("Velocity: " + fVec.airborneVelocity);
+                System.out.println("Velocity: " + data.airborneVelocity);
 
-                data.airborneTime = data.hypotenuseDistance / fVec.airborneVelocity;
+                data.airborneTime = data.hypotenuseDistance / data.airborneVelocity;
 
-                for (double t = 1; t <= data.airborneTime; t = t + 4) {
-                    fVec.airborneVelocity = fVec.airborneVelocity * t / data.airborneTime;
-                    System.out.println("Time (Seconds): " + t + " " + "Velocity: " + fVec.airborneVelocity);
+                for (data.accidentTime = 1; data.accidentTime <= data.airborneTime; data.accidentTime = data.accidentTime + 4) {
+                    data.airborneVelocity = data.airborneVelocity * data.accidentTime / data.airborneTime;
+                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.airborneVelocity);
                 }
 
                 break;
@@ -891,6 +995,8 @@ public class VelocityCalculator {
             default:
                 System.out.println("Enter Case number");
         }
+
+        return data;
     }
 
     private double calculateSkidVelocity(double dragFactor, double GF) {
