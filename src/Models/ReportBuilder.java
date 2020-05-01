@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReportBuilder {
-    
+
     public ReportBuilder(IncidentData data, String username) {
         createFile(data, username);
     }
@@ -31,7 +31,7 @@ public class ReportBuilder {
                 accidentType = "AIRBORNE";
             }
 
-            long cT = System.currentTimeMillis() / 1000000;
+            long cT = System.currentTimeMillis() / 1000000; // for random file name really
 
             File report = new File( "src/Reports/" + username + "_" + dateTime + "_" + accidentType + "_" + cT);
             if (report.createNewFile()) { // create new file, false if already a file of that name
