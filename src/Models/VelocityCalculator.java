@@ -71,13 +71,13 @@ public class VelocityCalculator {
 
     public double validateFinalVelocity(double num) {
         //validates skid distance
-        while (num >= 500) {
+        while (num >= 25) {
             validatePrompt();
             int validation = sc.nextInt();
             if (validation == 1)
                 break;
             else {
-                System.out.println("Please enter Skid Distance(meters):");
+                System.out.println("Please enter Final Velocity:");
                 num = sc.nextDouble();
             }
         }
@@ -396,16 +396,16 @@ public class VelocityCalculator {
                 System.out.println("Velocity: " + data.skidVelocity);
 
                 // calculate skid time
-                data.skidTime = data.skidDistance / data.skidVelocity;
+                data.skidTime = (2.0 * data.skidDistance) / (data.skidVelocity + data.finalVelocity);
                 System.out.println("Time: " + data.skidTime);
 
 
                 //TODO reconstruct velocity at time t
 
-//                for (data.accidentTime = 1; data.accidentTime <= data.skidTime; data.accidentTime++) {
-//                    data.skidVelocity = data.skidVelocity * data.accidentTime / data.skidTime;
-//                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.skidVelocity);
-//                }
+                for (data.accidentTime = data.skidTime; data.accidentTime >= 0; data.accidentTime--) {
+                    data.skidVelocityTime = (data.skidVelocity * data.accidentTime / data.skidTime);
+                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.skidVelocityTime);
+                }
 
                 break;
 
@@ -640,10 +640,10 @@ public class VelocityCalculator {
 
                 //TODO reconstruct velocity at time t
 
-//                for (data.accidentTime = 1; data.accidentTime <= data.yawTime; data.accidentTime++) {
-//                    data.yawVelocity = data.yawVelocity * data.accidentTime / data.yawTime;
-//                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.yawVelocity);
-//                }
+                for (data.accidentTime = 1; data.accidentTime <= data.yawTime; data.accidentTime++) {
+                    data.yawVelocityTime = data.yawVelocity * data.accidentTime / data.yawTime;
+                   System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.yawVelocityTime);
+                }
 
 
                 break;
@@ -672,10 +672,10 @@ public class VelocityCalculator {
 
                 //TODO reconstruct velocity at time t
 
-//                for (data.accidentTime = 1; data.accidentTime <= data.airborneTime; data.accidentTime = data.accidentTime + 4) {
-//                    data.airborneVelocity = data.airborneVelocity * data.accidentTime / data.airborneTime;
-//                    System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.airborneVelocity);
-//                }
+                for (data.accidentTime = 1; data.accidentTime <= data.airborneTime; data.accidentTime = data.accidentTime + 4) {
+                    data.airborneVelocityTime = data.airborneVelocity * data.accidentTime / data.airborneTime;
+                   System.out.println("Time (Seconds): " + data.accidentTime + " " + "Velocity: " + data.airborneVelocityTime);
+                }
 
                 break;
 
