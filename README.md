@@ -1,5 +1,14 @@
 Project requirements, cross out or add as needed
 
+Diagrams TODO:
+* use-case
+* domain model (class diagram)
+* assumptions, limitations, interpretations at the beginning or after intro note.
+* interaction diagram of most complex scenario
+* state chart for any object
+* activity diagram for system
+* Test cases (?)
+
 1. To develop a system that will hold information about the data needed and their services.
 
     ~~1.1. To be able to calculate the drag factors based on the current environmental conditions.~~
