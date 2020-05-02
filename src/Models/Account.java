@@ -101,7 +101,7 @@ public class Account {
         br.close();
         //login block ends
 
-        // testing purposes
+        //testing purposes
         //System.out.println(accountType);
     }
 
