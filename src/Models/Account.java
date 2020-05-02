@@ -108,9 +108,14 @@ public class Account {
     public int choice() {
         int choice;
         do {
-            System.out.println("1. See previous data");
-            System.out.println("2. Calculate new data");
-            choice = sc.nextInt();
+            if (accountType == AccountType.ADMIN) {
+                System.out.println("1. See previous data");
+                System.out.println("2. Calculate new data");
+                choice = sc.nextInt();
+                break;
+            }
+            System.out.println("Redirecting to data calculator.");
+            choice = 2;
         } while (choice != 1 && choice != 2);
 
         return choice;
