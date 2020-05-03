@@ -31,7 +31,7 @@ public class ReportBuilder {
 
         long cT = System.currentTimeMillis() / 1000000000; // for random file name really
 
-        boolean mkdirs = new File("src/Reports/").mkdirs(); // creates a new "Reports" directory if DoE
+        boolean mkdirs = new File("reports/").mkdirs(); // creates a new "Reports" directory if DoE
 
         // file with name
         File report = new File(username + "_" + dateTime + "_" + accidentType + "_" + cT);
@@ -41,7 +41,7 @@ public class ReportBuilder {
 
     private void writeData(IncidentData data, File file, String accidentType, String username) {
         try {
-            FileWriter myWriter = new FileWriter("src/Reports/" + file.getName());
+            FileWriter myWriter = new FileWriter("reports/" + file.getName());
 
             if (accidentType == "SKID") {
                 myWriter.write("Username: " + username + "\n" +

@@ -19,9 +19,9 @@ public class Test {
         int choice = account.choice();
         if (choice == 1 && account.accountType == AccountType.ADMIN) // load old data
         {
-            try (Stream<Path> walk = Files.walk(Paths.get("src/Reports"))) {
+            try (Stream<Path> walk = Files.walk(Paths.get("reports"))) {
 
-                // walks through the directory "src/Reports"
+                // walks through the directory "reports"
                 List<String> result = walk.filter(Files::isRegularFile)
                         .map(x -> x.toString()).collect(Collectors.toList());
 
@@ -30,7 +30,7 @@ public class Test {
                 do {
                     System.out.println("Pick a file: ");
 
-                    // displays all the files in "src/Reports"
+                    // displays all the files in "reports"
                     i = 1;
                     for (String path : result) {
                         System.out.println(i++ + ". " + path);
@@ -59,12 +59,9 @@ public class Test {
 
 
             } catch (IOException e) {
-                e.printStackTrace();
+                // directory doesn't exist, make it.
+                boolean mkdirs = new File("reports/").mkdirs();
             }
-            // display each file in src/Reports
-            // admin picks report
-            // display the report
-            // loop
         } else if (choice == 2) // calc new data
         {
             VelocityCalculator vCalc = new VelocityCalculator();

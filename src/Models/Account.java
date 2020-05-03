@@ -22,7 +22,7 @@ public class Account {
     public void login() throws Exception {
         //login block
         //creates the scanner, file(if doesn't already exist), bufferedreader, filewriter, and filereader
-        File loginDatabase = new File("src/loginDatabase");
+        File loginDatabase = new File("loginDatabase");
         loginDatabase.createNewFile();
         FileWriter writer = new FileWriter(loginDatabase, true);
         BufferedReader br = new BufferedReader(new FileReader(loginDatabase));
