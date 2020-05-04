@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Test {
+public class VelocityClient {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {

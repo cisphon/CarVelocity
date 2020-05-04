@@ -7,7 +7,7 @@ Diagrams TODO:
 * ~~interaction/sequence diagram of most complex scenario~~
 * ~~state chart for any object~~
 * ~~activity diagram for system~~
-* Test cases (?)
+* ~~Test Cases (?)~~
 
 1. To develop a system that will hold information about the data needed and their services.
 
